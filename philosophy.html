@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luminous Candles</title>
+<style>
+:root {
+  --accent: #ff6a1a;
+  --dark: #1f1f1f;
+  --light: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.philosophy-section {
+  padding: 120px 6%;
+  background: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.philosophy-header {
+  max-width: 900px;
+  margin: 0 auto 80px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.philosophy-header.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eyebrow {
+  letter-spacing: 3px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.philosophy-header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.philosophy-header span {
+  color: var(--accent);
+}
+
+/* Cards */
+.philosophy-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 60px;
+  justify-items: center;
+}
+
+.circle-card {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.circle-card.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.circle-svg {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.circle-svg circle {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 565;
+  stroke-dashoffset: 565;
+  animation: draw-circle 1.6s ease forwards;
+}
+
+.circle-card.dark circle {
+  stroke: var(--dark);
+}
+
+@keyframes draw-circle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.card-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  gap: 14px;
+}
+
+.icon {
+  font-size: 28px;
+}
+
+.card-content h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.card-content p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Expand Button */
+.expand-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #222;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.expand-btn:hover {
+  transform: scale(1.15) rotate(90deg);
+  background: var(--accent);
+}
+
+/* Hover Glow */
+.circle-card::after {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,106,26,0.25), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.circle-card:hover::after {
+  opacity: 1;
+}
+
+.design-section {
+  background: #fbf5ef;
+  padding: 120px 6%;
+  overflow: hidden;
+}
+
+.design-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.design-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  transform: translateY(60px);
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.design-image.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.design-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+  transition: transform 1.6s ease;
+}
+
+.design-image.show img {
+  transform: scale(1);
+}
+
+/* Text */
+.design-text {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s ease;
+}
+
+.design-text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.design-text h2 {
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.design-text h2 span {
+  color: var(--accent);
+}
+
+.design-text p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #666;
+  margin-bottom: 18px;
+}
+
+/* Subtle background typography */
+.design-section::after {
+  content: "LUMINOUS";
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  transform: rotate(-90deg) translateY(-50%);
+  font-size: 140px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .design-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+
+
+</style>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <header class="nav">
+  
+        <div class="logo">
+            <a href="index.html">
+            <img class="default_logo"
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="logotype"
+              style="height: 70px;">
+            </a>  
+          </div>
+    
+      <nav class="nav-links">
+    
+        <ul>
+    
+          <!-- ABOUT (Dropdown) -->
+          <li class="has-dropdown">
+            <a href="#" class="nav-link">About</a>
+          
+            <ul class="dropdown">
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="philosophy.html">Our Philosophy</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+              </ul>
+            </li>
+      
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li><a href="contacts.html" class="nav-link">Contacts</a></li>
+        </ul>
+
+      </nav>
+    
+      <!-- CALL TO ACTION -->
+      <button class="cta">
+        <span class="check-icon">✔</span>
+        Contact us
+      </button>
+      
+    </header>
+    <section class="philosophy-section">
+        <div class="philosophy-header">
+          <span class="eyebrow">OUR PHILOSOPHY</span>
+          <h1>
+            Shopping for candles should be a <br />
+            purely <span>soothing</span> experience
+          </h1>
+        </div>
+      
+        <div class="philosophy-cards">
+          <!-- Card -->
+          <div class="circle-card" data-delay="0">
+            <button class="expand-btn">+</button>
+      
+            <svg class="circle-svg" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90"></circle>
+            </svg>
+      
+            <div class="card-content">
+              <div class="icon">🍃</div>
+              <h3>Natural materials</h3>
+              <p>
+                We are committed to using premium, eco-friendly wax and essential oils,
+                ensuring a clean and sustainable burn.
+              </p>
+            </div>
+          </div>
+      
+          <!-- Card -->
+          <div class="circle-card dark" data-delay="150">
+            <button class="expand-btn">+</button>
+      
+            <svg class="circle-svg" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90"></circle>
+            </svg>
+      
+            <div class="card-content">
+              <div class="icon">🛡️</div>
+              <h3>Sustainability</h3>
+              <p>
+                Our goal is to create a zero-waste candle brand, using recyclable
+                packaging and responsible sourcing.
+              </p>
+            </div>
+          </div>
+      
+          <!-- Card -->
+          <div class="circle-card" data-delay="300">
+            <button class="expand-btn">+</button>
+      
+            <svg class="circle-svg" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90"></circle>
+            </svg>
+      
+            <div class="card-content">
+              <div class="icon">🌍</div>
+              <h3>Expertly Crafted</h3>
+              <p>
+                Each candle is hand-poured with precision, rigorously tested for
+                quality, and thoughtfully designed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+  <!-- ================= DESIGN SECTION (FIXED) ================= -->
+
+  <section class="design-section">
+    <div class="design-container">
+
+      <!-- IMAGE -->
+      <div class="design-image">
+        <img src="https://luminouscandles.co/wp-content/uploads/2025/02/f97a1a522179faac54a972b2663c6fdd0ffd1be9e2dbbdf4fdad051d99b2f441.jpeg.webp"
+             alt="Luminous candles" />
+      </div>
+
+      <!-- TEXT (NOW CORRECTLY BESIDE IMAGE) -->
+      <div class="design-text">
+        <span class="eyebrow">DESIGN PHILOSOPHY</span>
+
+        <h2>
+          Our design philosophy is guided by
+          <span>form and functionality.</span>
+        </h2>
+
+        <p>
+          Each candle is rooted in the perfect balance between form and
+          functionality. We believe that beauty should not only be seen but also
+          experienced in everyday living.
+        </p>
+
+        <p>
+          Our fragrances are thoughtfully crafted to enhance the aesthetic appeal
+          of any space while delivering a functional, clean burn that lasts.
+        </p>
+
+        <p>
+          From the sleek, minimalist containers to the carefully selected wicks,
+          every element is designed with purpose—ensuring a luxurious, calming
+          sensory experience.
+        </p>
+      </div>
+
+    </div>
+  </section>
+    
+      
+    <footer class="site-footer">
+        <div class="footer-container">
+      
+          <!-- LEFT -->
+          <div class="footer-col footer-left">
+            <h4>Contact us</h4>
+      
+            <p>
+              <span class="icon">📍</span>
+              45 Salem Turnpike #1062
+            </p>
+      
+            <p>
+              <span class="icon">📞</span>
+              +1 (860) 710–6651
+            </p>
+      
+            <p>
+              <span class="icon">✉️</span>
+              <a href="mailto:info@luminouscandles.co">info@luminouscandles.co</a>
+            </p>
+          </div>
+      
+          <!-- CENTER -->
+          <div class="footer-col footer-center">
+            <p class="footer-description">
+              Purify, nourish, and relax with our handcrafted candles made from natural
+              coconut apricot and 100% soy wax, infused with pure essential oils and
+              botanical extracts for a clean, aromatic experience.
+            </p>
+      
+            <div class="footer-socials">
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+            </div>
+          </div>
+      
+          <!-- RIGHT -->
+          <div class="footer-col footer-right">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="Luminous Candles logo"
+            />
+          </div>
+      
+        </div>
+      
+        <!-- DIVIDER -->
+        <div class="footer-divider"></div>
+      
+        <!-- COPYRIGHT -->
+        <p class="footer-copy">
+          Copyright © 2026 BentJun Hub LLC. All Rights Reserved.
+        </p>
+      </footer>
+
+      <script>
+
+
+
+  // Subtle parallax on image
+  window.addEventListener("scroll", () => {
+    const image = document.querySelector(".design-image img");
+    if (!image) return;
+
+    const rect = image.getBoundingClientRect();
+    const offset = rect.top * 0.05;
+    image.style.transform = `translateY(${offset}px) scale(1.05)`;
+  });
+  const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll(
+  ".philosophy-header, .circle-card, .design-image, .design-text"
+).forEach(el => observer.observe(el));
+
+      
+        const header = document.querySelector(".philosophy-header");
+        observer.observe(header);
+      
+        // Expand button interaction
+        document.querySelectorAll(".expand-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            btn.closest(".circle-card").classList.toggle("expanded");
+          });
+        });
+      </script>
+      
+</body>

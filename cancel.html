@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment Cancelled – Luminous Candles</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Inter,Arial;
+  background:#faf7f2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+}
+
+.cancel-card{
+  background:#fff;
+  padding:3rem;
+  max-width:480px;
+  width:100%;
+  border-radius:18px;
+  text-align:center;
+  box-shadow:0 30px 60px rgba(0,0,0,.12);
+  animation:fadeUp .8s ease forwards;
+}
+
+.icon{
+  font-size:3rem;
+  color:#ff7a00;
+}
+
+h1{margin:.6rem 0}
+p{color:#666;font-size:.95rem}
+
+.actions{
+  margin-top:2rem;
+  display:flex;
+  gap:1rem;
+}
+
+.actions a{
+  flex:1;
+  padding:.9rem;
+  border-radius:6px;
+  text-decoration:none;
+  text-align:center;
+  font-weight:500;
+  transition:.3s;
+}
+
+.btn-primary{
+  background:#ff7a00;
+  color:#fff;
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(255,122,0,.4);
+}
+
+.btn-outline{
+  border:1px solid #ddd;
+  color:#111;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="cancel-card">
+  <div class="icon">⚠</div>
+  <h1>Payment Cancelled</h1>
+  <p>Your cart is still saved. You can complete your purchase anytime.</p>
+
+  <div class="actions">
+    <a href="cart.html" class="btn-primary">Return to Cart</a>
+    <a href="shop.html" class="btn-outline">Continue Shopping</a>
+  </div>
+</div>
+
+</body>
+</html>

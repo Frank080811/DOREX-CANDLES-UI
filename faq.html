@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luminous Candles</title>
+<style>
+:root {
+  --accent: #ff6a1a;
+  --dark: #1f1f1f;
+  --muted: #666;
+}
+
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  color: var(--dark);
+}
+
+/* ================= FAQ SECTION ================= */
+
+.faq-section {
+  padding: 120px 6%;
+  background: #fff;
+}
+
+.faq-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 100px;
+  align-items: flex-start;
+}
+
+/* LEFT */
+.faq-intro {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: .8s ease;
+}
+
+.faq-intro.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-intro h2 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.faq-intro h2 span {
+  color: var(--accent);
+}
+
+.faq-intro button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform .3s ease;
+}
+
+.faq-intro button:hover {
+  transform: translateY(-2px);
+}
+
+/* RIGHT */
+.faq-list {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: .8s ease;
+}
+
+.faq-list.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.faq-icon {
+  font-size: 20px;
+  color: var(--accent);
+  transition: transform .4s ease;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease, opacity .4s ease;
+  opacity: 0;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.faq-answer p {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ================= CTA SECTION ================= */
+
+.cta-section {
+  background: var(--accent);
+  padding: 60px 6%;
+  transform: translateY(60px);
+  opacity: 0;
+  transition: .8s ease;
+}
+
+.cta-section.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.cta-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.cta-container h3 {
+  font-weight: 400;
+}
+
+.cta-container p {
+  font-size: 14px;
+  opacity: .9;
+}
+
+.cta-container a {
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 26px;
+  font-size: 14px;
+  transition: transform .3s ease;
+}
+
+.cta-container a:hover {
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .faq-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .cta-container {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}
+</style>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <header class="nav">
+  
+        <div class="logo">
+            <a href="index.html">
+            <img class="default_logo"
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="logotype"
+              style="height: 70px;">
+            </a>  
+          </div>
+    
+      <nav class="nav-links">
+    
+        <ul>
+    
+          <!-- ABOUT (Dropdown) -->
+          <li class="has-dropdown">
+            <a href="#" class="nav-link">About</a>
+          
+            <ul class="dropdown">
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="philosophy.html">Our Philosophy</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+              </ul>
+            </li>
+      
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li><a href="contacts.html" class="nav-link">Contacts</a></li>
+    
+        </ul>
+
+      </nav>
+    
+      <!-- CALL TO ACTION -->
+      <button class="cta">
+        <span class="check-icon">✔</span>
+        Contact us
+      </button>
+      
+    </header>
+<!-- ================= FAQ SECTION ================= -->
+
+<section class="faq-section">
+    <div class="faq-container">
+  
+      <!-- LEFT -->
+      <div class="faq-intro">
+        <span class="eyebrow">FAQ</span>
+        <h2>
+          We hope you find <br>
+          what you are looking for. <br>
+          Explore <span>FAQ’s</span>
+        </h2>
+        <button>Go to Shop →</button>
+      </div>
+  
+      <!-- RIGHT -->
+<!-- RIGHT -->
+<div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-question">
+        What makes Luminous Candles different from other candles?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Luminous Candles are handcrafted using sustainable coconut apricot and
+          100% soy wax, ensuring a clean, long-lasting burn. We use premium
+          essential oils and thoughtfully designed vessels to deliver both beauty
+          and performance.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        Are your candles made with natural ingredients?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Yes. Our candles are made with natural wax blends and high-quality
+          essential oils. They are free from parabens, phthalates, and harsh
+          additives.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        How long do your candles burn?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Burn time depends on candle size, but most of our candles burn between
+          40–80 hours when properly cared for.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        How should I care for my candle to ensure the best burn?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Trim the wick to ¼ inch before each burn, allow the wax to melt evenly
+          across the surface, and avoid burning for more than 4 hours at a time.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        Do your candles produce soot?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Our candles are designed to burn cleanly with minimal soot when properly
+          maintained. Regular wick trimming helps ensure optimal performance.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        Are Luminous Candles safe for pets and children?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          While our candles are made with clean ingredients, we recommend always
+          burning candles under supervision and keeping them out of reach of pets
+          and children.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        Can I reuse or recycle the candle jars?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Absolutely. Once the candle is finished, clean out the remaining wax and
+          reuse the jar as décor, storage, or planters. Our packaging is designed
+          with sustainability in mind.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        Do you offer custom or personalized candles?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Yes, we offer custom and personalized candle options for events, gifts,
+          and special occasions. Please contact us for details and lead times.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        Do you ship internationally?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          We currently ship within select regions. International shipping options
+          may be available—please check at checkout or contact us for assistance.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        What should I do if my candle arrives damaged?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          If your candle arrives damaged, please contact us within 48 hours of
+          delivery with photos, and we’ll be happy to assist with a replacement or
+          refund.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        Do you offer wholesale or bulk orders?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Yes, we offer wholesale and bulk purchasing options for retailers,
+          corporate gifting, and events. Reach out to our team for pricing and
+          availability.
+        </p>
+      </div>
+    </div>
+  
+    <div class="faq-item">
+      <div class="faq-question">
+        What is your return policy?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Due to the nature of our products, unused candles may be returned within
+          our stated return window. Please refer to our return policy or contact
+          customer support for details.
+        </p>
+      </div>
+    </div>
+  
+  </div>
+  
+  </section>
+  
+  <!-- ================= CTA ================= -->
+  
+  <section class="cta-section">
+    <div class="cta-container">
+      <div>
+        <h3>Get a free consultation!</h3>
+        <p>If we haven’t answered your question, feel free to get in touch.</p>
+      </div>
+      <a href="#">View more →</a>
+    </div>
+  </section>
+      
+    <footer class="site-footer">
+        <div class="footer-container">
+      
+          <!-- LEFT -->
+          <div class="footer-col footer-left">
+            <h4>Contact us</h4>
+      
+            <p>
+              <span class="icon">📍</span>
+              45 Salem Turnpike #1062
+            </p>
+      
+            <p>
+              <span class="icon">📞</span>
+              +1 (860) 710–6651
+            </p>
+      
+            <p>
+              <span class="icon">✉️</span>
+              <a href="mailto:info@luminouscandles.co">info@luminouscandles.co</a>
+            </p>
+          </div>
+      
+          <!-- CENTER -->
+          <div class="footer-col footer-center">
+            <p class="footer-description">
+              Purify, nourish, and relax with our handcrafted candles made from natural
+              coconut apricot and 100% soy wax, infused with pure essential oils and
+              botanical extracts for a clean, aromatic experience.
+            </p>
+      
+            <div class="footer-socials">
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+            </div>
+          </div>
+      
+          <!-- RIGHT -->
+          <div class="footer-col footer-right">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="Luminous Candles logo"
+            />
+          </div>
+      
+        </div>
+      
+        <!-- DIVIDER -->
+        <div class="footer-divider"></div>
+      
+        <!-- COPYRIGHT -->
+        <p class="footer-copy">
+          Copyright © 2026 BentJun Hub LLC. All Rights Reserved.
+        </p>
+      </footer>
+  <!-- ================= JS ================= -->
+  
+  <script>
+    /* Scroll reveal */
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    document.querySelectorAll(
+      ".faq-intro, .faq-list, .cta-section"
+    ).forEach(el => revealObserver.observe(el));
+    
+    /* Accordion */
+    document.querySelectorAll(".faq-question").forEach(question => {
+      question.addEventListener("click", () => {
+        const item = question.parentElement;
+        item.classList.toggle("active");
+      });
+    });
+    </script>
+</body>

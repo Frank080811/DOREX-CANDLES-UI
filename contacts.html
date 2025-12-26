@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luminous Candles</title>
+<style>
+:root {
+  --accent: #ff6a1a;
+  --dark: #1f1f1f;
+  --muted: #666;
+}
+
+/* SECTION */
+.contact-section {
+  background: #fff;
+}
+
+/* MAP */
+.contact-map {
+  height: 420px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 1s ease;
+}
+
+.contact-map.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* CONTENT GRID */
+.contact-content {
+  max-width: 1200px;
+  margin: auto;
+  padding: 120px 6%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+/* LEFT INFO */
+.contact-info {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: .8s ease;
+}
+
+.contact-info.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-info h2 span {
+  color: var(--accent);
+}
+
+.contact-info p {
+  color: var(--muted);
+  margin: 20px 0;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-info li {
+  margin-bottom: 10px;
+}
+
+.socials a {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 10px;
+  text-decoration: none;
+  transition: .3s ease;
+}
+
+.socials a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* FORM */
+.contact-form {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: .8s ease;
+}
+
+.contact-form.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-form h3 {
+  font-weight: 400;
+}
+
+.note {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  background: transparent;
+}
+
+.form-group label {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+  pointer-events: none;
+  transition: .3s ease;
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: -8px;
+  font-size: 11px;
+  color: var(--accent);
+}
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: transform .3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .contact-content {
+    grid-template-columns: 1frl;
+  }
+}
+
+</style>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <header class="nav">
+  
+      <div class="logo">
+        <img class="default_logo"
+          src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+          alt="logotype"
+          style="height: 70px;">
+      </div>
+    
+      <nav class="nav-links">
+    
+        <ul>
+    
+          <!-- ABOUT (Dropdown) -->
+          <li class="has-dropdown">
+            <a href="#" class="nav-link">About</a>
+          
+            <ul class="dropdown">
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="philosophy.html">Our Philosophy</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+              </ul>
+            </li>
+      
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li><a href="contacts.html" class="nav-link">Contacts</a></li>
+    
+        </ul>
+
+      </nav>
+    
+      <!-- CALL TO ACTION -->
+      <button class="cta">
+        <span class="check-icon">✔</span>
+        Contact us
+      </button>
+      
+    </header>
+    <section class="contact-section">
+
+        <!-- MAP -->
+        <div class="contact-map">
+          <iframe
+            src="https://www.google.com/maps?q=45%20Salem%20Turnpike%20Norwich%20CT&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      
+        <!-- CONTENT -->
+        <div class="contact-content">
+      
+          <!-- LEFT -->
+          <div class="contact-info">
+            <span class="eyebrow">CONTACT</span>
+            <h2>How to find <span>us</span></h2>
+      
+            <p>
+              Get in touch to discuss your needs. Please give us a call, drop us an
+              email, or fill out the contact form and we’ll get back to you.
+            </p>
+      
+            <ul>
+              <li>📍 45 Salem Turnpike #1062</li>
+              <li>📞 +1 (860) 710-6651</li>
+              <li>✉️ info@luminouscandles.co</li>
+            </ul>
+      
+            <div class="socials">
+              <a href="#">f</a>
+              <a href="#">in</a>
+            </div>
+          </div>
+      
+          <!-- RIGHT -->
+          <form class="contact-form">
+            <h3>Contact us</h3>
+            <p class="note">
+              Your email address will not be published. Required fields are marked *
+            </p>
+      
+            <div class="form-group">
+              <input type="text" required />
+              <label>Your Name *</label>
+            </div>
+      
+            <div class="form-group">
+              <input type="email" required />
+              <label>Your Email *</label>
+            </div>
+      
+            <div class="form-group">
+              <input type="text" />
+              <label>Your Website</label>
+            </div>
+      
+            <div class="form-group">
+              <textarea rows="4" required></textarea>
+              <label>Message *</label>
+            </div>
+      
+            <button type="submit">Get in touch</button>
+          </form>
+      
+        </div>
+      </section>      
+      
+    <footer class="site-footer">
+        <div class="footer-container">
+      
+          <!-- LEFT -->
+          <div class="footer-col footer-left">
+            <h4>Contact us</h4>
+      
+            <p>
+              <span class="icon">📍</span>
+              45 Salem Turnpike #1062
+            </p>
+      
+            <p>
+              <span class="icon">📞</span>
+              +1 (860) 710–6651
+            </p>
+      
+            <p>
+              <span class="icon">✉️</span>
+              <a href="mailto:info@luminouscandles.co">info@luminouscandles.co</a>
+            </p>
+          </div>
+      
+          <!-- CENTER -->
+          <div class="footer-col footer-center">
+            <p class="footer-description">
+              Purify, nourish, and relax with our handcrafted candles made from natural
+              coconut apricot and 100% soy wax, infused with pure essential oils and
+              botanical extracts for a clean, aromatic experience.
+            </p>
+      
+            <div class="footer-socials">
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+            </div>
+          </div>
+      
+          <!-- RIGHT -->
+          <div class="footer-col footer-right">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="Luminous Candles logo"
+            />
+          </div>
+      
+        </div>
+      
+        <!-- DIVIDER -->
+        <div class="footer-divider"></div>
+      
+        <!-- COPYRIGHT -->
+        <p class="footer-copy">
+          Copyright © 2026 BentJun Hub LLC. All Rights Reserved.
+        </p>
+      </footer>
+      
+      <script>
+        const revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+            }
+          });
+        }, { threshold: 0.3 });
+        
+        document.querySelectorAll(
+          ".contact-map, .contact-info, .contact-form"
+        ).forEach(el => revealObserver.observe(el));
+        
+        /* Map parallax */
+        window.addEventListener("scroll", () => {
+          const map = document.querySelector(".contact-map iframe");
+          if (!map) return;
+          const rect = map.getBoundingClientRect();
+          map.style.transform = `translateY(${rect.top * 0.04}px)`;
+        });
+        </script>
+        
+</body>

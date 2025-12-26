@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart – Luminous Candles</title>
+  <style>
+    *{box-sizing:border-box;font-family:Inter,Arial}
+    body{margin:0;background:#faf7f2;color:#111}
+    
+   
+    
+    .cart-table th{
+      text-align:left;
+      font-size:.8rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      border-bottom:1px solid #ddd;
+      padding-bottom:.7rem;
+    }
+    
+    .cart-table td{
+      padding:1.2rem 0;
+      border-bottom:1px solid #eee;
+      vertical-align:middle;
+    }
+    
+    .cart-product{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    
+    .cart-product img{
+      width:70px;
+      height:70px;
+      object-fit:contain;
+      background:#fff;
+      border-radius:8px;
+      padding:6px;
+    }
+    
+    .remove-btn{
+      background:none;
+      border:none;
+      font-size:1.2rem;
+      color:#aaa;
+      cursor:pointer;
+    }
+    .remove-btn:hover{color:#ff7a00}
+    
+    /* ===== QUANTITY ===== */
+    .qty{
+      display:flex;
+      align-items:center;
+      border:1px solid #ddd;
+      width:90px;
+      justify-content:space-between;
+    }
+    
+    .qty button{
+      width:30px;
+      border:none;
+      background:#fff;
+      cursor:pointer;
+    }
+    
+    .qty span{font-size:.9rem}
+    
+    /* ===== DISCOUNT ===== */
+    .discount-box{
+      margin-top:2rem;
+    }
+    
+/* ================= DISCOUNT (Woo Style) ================= */
+.discount-box{
+  margin-top:4rem;
+  max-width:420px;
+}
+
+.discount-box h3{
+  font-size:1.2rem;
+  font-weight:500;
+  margin-bottom:.6rem;
+}
+
+.discount-box p{
+  font-size:.85rem;
+  color:#777;
+  margin-bottom:1.4rem;
+}
+
+/* Input like Woo (underline only) */
+.discount-box input{
+  width:100%;
+  border:none;
+  border-bottom:1px solid #ddd;
+  padding:.6rem 0;
+  font-size:.9rem;
+  background:transparent;
+  outline:none;
+  transition:border-color .25s ease;
+}
+
+.discount-box input:focus{
+  border-bottom-color:#111;
+}
+
+/* Apply coupon button */
+/* ================= APPLY COUPON BUTTON ================= */
+/* ================= APPLY COUPON BUTTON ================= */
+.applyCoupon{
+  margin-top:2.2rem;
+  background:#ff7a00;
+  color:#fff;
+  border:none;
+  padding:1.15rem 3rem;          /* ⬅ Bigger button */
+  font-size:.95rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  border-radius:6px;
+  transition:
+    background .35s ease,
+    transform .25s ease,
+    box-shadow .35s ease;
+}
+
+/* Hover – lift + glow */
+.applyCoupon:hover{
+  background:#111;
+  transform:translateY(-3px);
+  box-shadow:0 14px 28px rgba(0,0,0,.18);
+}
+
+/* Active – press */
+.applyCoupon:active{
+  transform:translateY(0);
+  box-shadow:0 6px 14px rgba(0,0,0,.14);
+}
+
+/* Focus – accessibility */
+.applyCoupon:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px rgba(255,122,0,.35);
+}
+
+/* Shimmer animation */
+.applyCoupon::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-130%;
+  width:130%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transition:left .65s ease;
+}
+
+.applyCoupon:hover::after{
+  left:130%;
+}
+
+
+/* Focus (keyboard accessibility) */
+.discount-box button:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px rgba(255,122,0,.35);
+}
+
+/* Subtle shimmer effect */
+.discount-box button::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:120%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transition:left .6s ease;
+}
+
+.discount-box button:hover::after{
+  left:120%;
+}
+
+    /* ===== TOTALS ===== */
+    .cart-summary{
+      background:#fff;
+      padding:2rem;
+      border-radius:14px;
+      animation:fadeUp .6s ease .1s both;
+    }
+    
+    .cart-summary h3{margin-bottom:1.2rem}
+    
+    .summary-row{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:.8rem;
+    }
+    
+    .summary-row.total{
+      font-size:1.1rem;
+      font-weight:600;
+    }
+    
+    .checkout-btn{
+      margin-top:1.2rem;
+      width:100%;
+      padding:.9rem;
+      background:#ff7a00;
+      color:#fff;
+      border:none;
+      cursor:pointer;
+    }
+    
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    
+    @media(max-width:900px){
+      .cart-page{grid-template-columns:1fr}
+    }
+
+/* ================= LEFT COLUMN ================= */
+.cart-left{
+  width:100%;
+}
+
+.update-cart{
+  margin-top: 2rem;
+  margin-left: auto;
+  display: block;
+  background: #cfcfcf;
+  color: #777;
+  padding: .9rem 1.8rem;
+  border: none;
+  border-radius: 4px;
+  transition: all .3s ease;
+}
+
+
+/* ================= BUTTON ANIMATIONS ================= */
+button{
+  transition:all .25s ease;
+}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+/* Coupon Button */
+.applyCoupon{
+  background:#ff7a00;
+  color:#fff;
+  border-radius:4px;
+}
+
+.discount-box button:hover{
+  background:#111;
+}
+
+/* Checkout */
+.checkout-btn{
+  background:#111;
+  border-radius:4px;
+}
+
+.checkout-btn:hover{
+  background:#ff7a00;
+}
+
+/* G Pay */
+.checkout-btn.gpay{
+  background:#000;
+}
+
+.checkout-btn.gpay:hover{
+  background:#222;
+}
+
+/* ================= RIGHT COLUMN ================= */
+.cart-right{
+  padding-top:3.5rem;
+}
+
+/* Totals spacing */
+.summary-row{
+  padding:.3rem 0;
+}
+
+/* Divider like Woo */
+.summary-row.total{
+  border-top:1px solid #ddd;
+  margin-top:1.2rem;
+  padding-top:1.2rem;
+}
+
+/* PayPal note */
+.payment-note{
+  font-size:.75rem;
+  color:#777;
+  margin:1rem 0;
+}
+
+/* Discount + Totals alignment */
+.discount-box{
+  max-width:420px;
+}
+
+.cart-summary{
+  max-width:360px;
+}
+
+/* Buttons */
+.checkout-btn{
+  transition:all .3s ease;
+}
+
+.checkout-btn:hover{
+  transform:translateY(-2px);
+}
+
+
+/* ================= CART PAGE LAYOUT ================= */
+
+.cart-page{
+  max-width:1200px;
+  margin:40px auto 140px;
+  padding:0 5rem;
+}
+
+/* ROW 1 — TABLE */
+.cart-table-section{
+  width:100%;
+}
+
+/* ROW 2 — DISCOUNT + TOTALS */
+.cart-bottom{
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:4rem;
+  margin-top:4rem;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .cart-bottom{
+    grid-template-columns:1fr;
+  }
+}
+
+/* RIGHT SIDE */
+.cart-right{
+  padding-top:2.2rem;
+}
+
+/* TABLE */
+.cart-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.cart-table thead th{
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:500;
+  padding-bottom:1rem;
+  border-bottom:1px solid #111;
+}
+
+.cart-table td{
+  padding:1.8rem 0;
+  border-bottom:1px solid #e5e5e5;
+  font-size:.95rem;
+}
+
+/* PRODUCT CELL */
+.cart-product{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.cart-product img{
+  width:58px;
+  height:58px;
+  background:#f7f7f7;
+  border-radius:0;
+  padding:6px;
+}
+
+/* PRICE */
+.cart-table td:nth-child(2){
+  color:#ff7a00;
+}
+
+/* QUANTITY – WC STYLE */
+.qty{
+  border:1px solid #eee;
+  padding:.35rem .6rem;
+  width:72px;
+  justify-content:space-between;
+}
+
+.qty button{
+  background:none;
+  font-size:1rem;
+  color:#777;
+}
+
+.qty span{
+  font-size:.85rem;
+}
+
+/* REMOVE */
+.remove-btn{
+  font-size:1.1rem;
+  color:#bbb;
+}
+
+/* UPDATE CART BUTTON (OPTIONAL) */
+.update-cart{
+  margin-top:2rem;
+  background:#ddd;
+  color:#777;
+  padding:.7rem 1.4rem;
+  border:none;
+  cursor:not-allowed;
+}
+
+/* DISCOUNT */
+.discount-box{
+  margin-top:4rem;
+}
+
+.discount-box h3{
+  font-size:1.1rem;
+  margin-bottom:.6rem;
+}
+
+.discount-box p{
+  font-size:.85rem;
+  color:#777;
+}
+
+.discount-box input{
+  border:none;
+  border-bottom:1px solid #ddd;
+  padding:.6rem 0;
+}
+
+
+/* CART TOTALS */
+.cart-summary{
+  background:none;
+  padding:0;
+}
+
+.cart-summary h3{
+  font-size:1.2rem;
+  margin-bottom:1.6rem;
+}
+
+.summary-row{
+  font-size:.9rem;
+}
+
+.summary-row span:last-child{
+  color:#ff7a00;
+}
+
+.summary-row.total{
+  font-size:1rem;
+  margin-top:1rem;
+  padding-top:1rem;
+  border-top:1px solid #ddd;
+}
+
+.checkout-btn{
+  margin-top:1.6rem;
+  padding:1rem;
+  background:#111;
+}
+
+/* PAYMENTS */
+.payment-note{
+  font-size:.75rem;
+  color:#777;
+  margin-top:.8rem;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .cart-page{
+    grid-template-columns:1fr;
+  }
+}
+
+    </style>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <header class="nav">
+  
+        <div class="logo">
+            <a href="index.html">
+            <img class="default_logo"
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="logotype"
+              style="height: 70px;">
+            </a>  
+          </div>
+    
+      <nav class="nav-links">
+    
+        <ul>
+    
+          <!-- ABOUT (Dropdown) -->
+          <ul class="dropdown">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="philosophy.html">Our Philosophy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </li>
+  
+        <li><a href="shop.html" class="nav-link">Shop</a></li>
+        <li><a href="contacts.html" class="nav-link">Contacts</a></li>
+    
+        </ul>
+
+      </nav>
+    
+      <!-- CALL TO ACTION -->
+      <button class="cta">
+        <span class="check-icon">✔</span>
+        Contact us
+      </button>
+      
+    </header>
+    <!-- ================= LEFT: CART TABLE ================= -->
+
+    <main class="cart-page">
+
+        <!-- ROW 1: TABLE (FULL WIDTH) -->
+        <section class="cart-table-section">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cartTableBody"></tbody>
+          </table>
+      
+          <button class="update-cart" id="update-cart">Update cart</button>
+          
+        </section>
+      
+        <!-- ROW 2: DISCOUNT + TOTALS -->
+        <section class="cart-bottom">
+      
+          <!-- DISCOUNT (LEFT) -->
+          <div class="discount-box">
+            <h3>Discount</h3>
+            <p>Enter your coupon code if you have one.</p>
+            <input id="couponInput" placeholder="Coupon code">
+            <button class="applyCoupon" id="applyCoupon">Apply coupon</button>
+          </div>
+      
+          <!-- TOTALS (RIGHT) -->
+          <div class="cart-summary">
+            <h3>Cart totals</h3>
+      
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span>$<span id="subtotal">0.00</span></span>
+            </div>
+      
+            <div class="summary-row">
+              <span>Discount</span>
+              <span>- $<span id="discount">0.00</span></span>
+            </div>
+      
+            <div class="summary-row total">
+              <span>Total</span>
+              <span>$<span id="total">0.00</span></span>
+            </div>
+      
+            <button class="checkout-btn" id="checkoutBtn">
+                Proceed to checkout
+              </button>
+              
+              
+      
+            <p class="payment-note">
+              Pay in 4 interest-free payments with PayPal.
+            </p>
+      
+            <button class="checkout-btn gpay">Buy with G Pay</button>
+          </div>
+      
+        </section>
+      
+      </main>
+      
+
+    <footer class="site-footer">
+        <div class="footer-container">
+      
+          <!-- LEFT -->
+          <div class="footer-col footer-left">
+            <h4>Contact us</h4>
+      
+            <p>
+              <span class="icon">📍</span>
+              45 Salem Turnpike #1062
+            </p>
+      
+            <p>
+              <span class="icon">📞</span>
+              +1 (860) 710–6651
+            </p>
+      
+            <p>
+              <span class="icon">✉️</span>
+              <a href="mailto:info@luminouscandles.co">info@luminouscandles.co</a>
+            </p>
+          </div>
+      
+          <!-- CENTER -->
+          <div class="footer-col footer-center">
+            <p class="footer-description">
+              Purify, nourish, and relax with our handcrafted candles made from natural
+              coconut apricot and 100% soy wax, infused with pure essential oils and
+              botanical extracts for a clean, aromatic experience.
+            </p>
+      
+            <div class="footer-socials">
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+            </div>
+          </div>
+      
+          <!-- RIGHT -->
+          <div class="footer-col footer-right">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="Luminous Candles logo"
+            />
+          </div>
+      
+        </div>
+      
+        <!-- DIVIDER -->
+        <div class="footer-divider"></div>
+      
+        <!-- COPYRIGHT -->
+        <p class="footer-copy">
+          Copyright © 2026 BentJun Hub LLC. All Rights Reserved.
+        </p>
+      </footer>
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        
+          /* ================= ELEMENTS ================= */
+          const body = document.getElementById("cartTableBody");
+          const subtotalEl = document.getElementById("subtotal");
+          const discountEl = document.getElementById("discount");
+          const totalEl = document.getElementById("total");
+          const checkoutBtn = document.getElementById("checkoutBtn");
+        
+          /* ================= STATE ================= */
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          let discount = parseFloat(localStorage.getItem("discount")) || 0;
+        
+          /* ================= RENDER CART ================= */
+          function renderCart() {
+            body.innerHTML = "";
+            let subtotal = 0;
+        
+            cart.forEach(item => {
+              const itemTotal = item.price * item.qty;
+              subtotal += itemTotal;
+        
+              body.innerHTML += `
+                <tr>
+                  <td>
+                    <div class="cart-product">
+                      <img src="${item.img}">
+                      <div>${item.name}</div>
+                    </div>
+                  </td>
+                  <td>$${item.price.toFixed(2)}</td>
+                  <td>
+                    <div class="qty">
+                      <button onclick="changeQty('${item.id}', -1)">−</button>
+                      <span>${item.qty}</span>
+                      <button onclick="changeQty('${item.id}', 1)">+</button>
+                    </div>
+                  </td>
+                  <td>$${itemTotal.toFixed(2)}</td>
+                  <td>
+                    <button class="remove-btn" onclick="removeItem('${item.id}')">×</button>
+                  </td>
+                </tr>
+              `;
+            });
+        
+            subtotalEl.textContent = subtotal.toFixed(2);
+            discountEl.textContent = discount.toFixed(2);
+            totalEl.textContent = (subtotal - discount).toFixed(2);
+        
+            localStorage.setItem("cart", JSON.stringify(cart));
+            localStorage.setItem("discount", discount.toFixed(2));
+          }
+        
+          /* ================= QUANTITY ================= */
+          window.changeQty = (id, delta) => {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+        
+            item.qty += delta;
+            if (item.qty <= 0) {
+              cart = cart.filter(i => i.id !== id);
+            }
+            renderCart();
+          };
+        
+          /* ================= REMOVE ITEM ================= */
+          window.removeItem = id => {
+            cart = cart.filter(i => i.id !== id);
+            renderCart();
+          };
+        
+          /* ================= APPLY COUPON ================= */
+          document.getElementById("applyCoupon").addEventListener("click", () => {
+            const code = document.getElementById("couponInput").value.trim().toUpperCase();
+            const subtotal = parseFloat(subtotalEl.textContent);
+        
+            discount = code === "LUMINOUS10" ? subtotal * 0.1 : 0;
+            renderCart();
+          });
+        
+          /* ================= CHECKOUT ================= */
+          if (checkoutBtn) {
+            checkoutBtn.addEventListener("click", () => {
+              if (!cart.length) {
+                alert("Your cart is empty.");
+                return;
+              }
+        
+              const checkoutData = {
+                items: cart,
+                discount: {
+                  amount: discount
+                },
+                totals: {
+                  subtotal: parseFloat(subtotalEl.textContent),
+                  total: parseFloat(totalEl.textContent)
+                },
+                timestamp: Date.now()
+              };
+        
+              localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
+              window.location.href = "checkout.html";
+            });
+          }
+        
+          /* ================= INIT ================= */
+          renderCart();
+        
+        });
+        </script>
+        
+</body>
+</html>

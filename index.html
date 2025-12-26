@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luminous Candles</title>
+  <style>
+
+
+/* ================= FAQ SECTION ================= */
+.faq-section {
+  padding: 6rem 2rem;
+  background: #fff;
+}
+
+.faq-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* LEFT */
+.faq-dots {
+  color: #ff7a00;
+  letter-spacing: 6px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 1.2rem;
+}
+
+.faq-title {
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #222;
+  margin-bottom: 2.5rem;
+}
+
+.faq-title span {
+  color: #ff7a00;
+}
+
+/* FAQ ITEMS */
+.faq-item {
+  border-top: 1px solid #eee;
+}
+
+.faq-item:last-child {
+  border-bottom: 1px solid #eee;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1.4rem 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-icon {
+  font-size: 1.4rem;
+  color: #ff7a00;
+  transition: transform 0.4s ease;
+}
+
+/* ANSWER */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(.16,1,.3,1);
+}
+
+.faq-answer p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #666;
+  padding-bottom: 1.5rem;
+}
+
+/* ACTIVE */
+.faq-item.active .faq-answer {
+  max-height: 300px;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+/* RIGHT IMAGE */
+.faq-right {
+  display: flex;
+  justify-content: center;
+}
+
+.faq-image {
+  width: 100%;
+  max-width: 420px;
+  overflow: hidden;
+  border-radius: 0 0 240px 240px;
+}
+
+.faq-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .faq-container {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-title {
+    font-size: 2rem;
+  }
+
+  .faq-image {
+    max-width: 100%;
+    border-radius: 0 0 180px 180px;
+  }
+}
+
+/* ================= SHOP PAGE ================= */
+.shop-page {
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 4rem;
+  padding: 0 2rem;
+}
+
+.shop-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 4rem;
+}
+
+.shop-sidebar {
+  position: sticky;
+  top: calc(var(--nav-height) + 2rem);
+}
+
+/* SIDEBAR */
+.shop-sidebar {
+  position: sticky;
+  top: 140px;
+}
+
+.shop-block {
+  margin-bottom: 2.5rem;
+}
+
+.shop-block h4 {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* SEARCH */
+.shop-search {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ddd;
+}
+
+/* CATEGORY */
+.category-list {
+  list-style: none;
+}
+
+.category-list li button {
+  background: none;
+  border: none;
+  padding: 0.4rem 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.category-list button.active {
+  color: #ff7a00;
+}
+
+/* PRICE */
+.price-value {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+}
+
+/* PRODUCTS GRID */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+/* PRODUCT CARD */
+.shop-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  text-align: center;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.shop-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 45px rgba(0,0,0,0.08);
+}
+
+/* IMAGE */
+.shop-img {
+  padding: 1.2rem;
+  background: #fafafa;
+}
+
+.shop-img img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  transition: transform .5s ease;
+}
+
+.shop-card:hover img {
+  transform: scale(1.06);
+}
+
+.shop-card h5 {
+  margin: 1rem 0 .4rem;
+  font-size: .95rem;
+  font-weight: 600;
+}
+
+.shop-card span {
+  color: #ff7a00;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .shop-page {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+  /* SHOP BUTTON */
+  .shop-btn {
+    background: #f26b1d;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  
+  .shop-btn:hover {
+    transform: translateX(6px);
+    box-shadow: 0 10px 25px rgba(242,107,29,0.35);
+  }
+  
+  /* PRODUCT */
+  .hero-product {
+    position: absolute;
+    right: 6rem;
+    bottom: 10%;
+    z-index: 2;
+  }
+  
+  .hero-product img {
+    width: 420px;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* FLOATING PRODUCT */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 900px) {
+    .nav {
+      padding: 1.5rem 2rem;
+    }
+  
+    .hero {
+      flex-direction: column;
+      padding: 8rem 2rem;
+      text-align: center;
+    }
+  
+    .hero-product {
+      position: static;
+      margin-top: 3rem;
+    }
+  
+    .hero-product img {
+      width: 280px;
+    }
+  }
+
+
+  
+  /* ================= OVERLAY ================= */
+  
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s;
+    z-index: 90;
+  }
+  
+  .cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* ================= DRAWER ================= */
+  
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 380px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -20px 0 60px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    transition: right 0.5s cubic-bezier(.16,1,.3,1);
+    z-index: 100;
+  }
+  
+  .cart-drawer.active {
+    right: 0;
+  }
+  
+  /* ================= HEADER ================= */
+  
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* ================= ITEMS ================= */
+  
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+  
+  .cart-item {
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .cart-item img {
+    width: 70px;
+    border-radius: 12px;
+  }
+  
+  .cart-item h4 {
+    font-size: 0.95rem;
+  }
+  
+  .qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .qty-controls button {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: none;
+    cursor: pointer;
+  }
+  
+  /* ================= FOOTER ================= */
+  
+  .cart-footer {
+    border-top: 1px solid #eee;
+    padding: 1.2rem;
+  }
+  
+  .cart-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .checkout-btn {
+    width: 100%;
+    background: #ff7a00;
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    cursor: pointer;
+  }
+
+  .hero-product {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-product img {
+    width: 120%;
+    max-width: 520px;
+    height: auto;
+    transform: translateY(-10px);
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+  
+  /* ================= BEST SELLERS ================= */
+
+.best-sellers {
+    padding: 5rem 3rem;
+    text-align: center;
+  }
+  
+  .best-sellers h2 {
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+  }
+  
+  .best-sellers span {
+    color: #ff7a00;
+  }
+  
+  /* ================= SLIDER ================= */
+  
+  .slider-wrapper {
+    position: relative;
+  }
+  
+  .slider {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding: 1rem;
+  }
+  
+  .slider::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* ================= PRODUCT CARD ================= */
+  
+  .product-card {
+    min-width: 280px;
+    scroll-snap-align: center;
+    transition: transform 0.4s ease;
+  }
+  
+  .product-img {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  
+  .product-img img {
+    width: 100%;
+    transition: transform 0.6s ease;
+  }
+  
+  .product-card:hover img {
+    transform: scale(1.08);
+  }
+  
+  /* ================= ADD TO CART ================= */
+  
+  .add-cart {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: bottom 0.4s ease;
+  }
+  
+  .product-card:hover .add-cart {
+    bottom: 0;
+  }
+  
+  /* ================= TEXT ================= */
+  
+  .product-card h4 {
+    margin-top: 1rem;
+  }
+  
+  .product-card p {
+    color: #ff7a00;
+    font-weight: 600;
+  }
+  
+  /* ================= BUTTONS ================= */
+  
+  .slider-btn {
+    position: absolute;
+    top: 45%;
+    background: #fff;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+  }
+  
+  .slider-btn.left { left: -20px; }
+  .slider-btn.right { right: -20px; }
+  
+  /* ================= DOTS ================= */
+  
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 2rem;
+  }
+  
+  .slider-dots span {
+    width: 10px;
+    height: 6px;
+    background: #ccc;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+  
+  .slider-dots span.active {
+    width: 26px;
+    background: #000;
+  }
+
+/* ================= SLIDER CARD FIX ================= */
+
+.product-card {
+    min-width: 300px;
+    max-width: 300px;
+    margin: 0 12px;
+    border: 1px solid #eee;
+    border-radius: 18px;
+    background: #fff;
+    scroll-snap-align: center;
+  }
+  
+  /* FORCE IMAGE CONSISTENCY */
+  .product-img {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+  }
+  
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  /* DOTS BELOW SLIDER */
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.8rem;
+    gap: 10px;
+  }
+  
+  .slider-dots span {
+    width: 8px;
+    height: 8px;
+    background: #ccc;
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+  
+  .slider-dots span.active {
+    width: 24px;
+    border-radius: 12px;
+    background: #f26b1d;
+  }
+
+/* ================= LIFESTYLE SECTION ================= */
+.lifestyle-section {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Background image fully covers section */
+.bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/Firefly_Gemini Flash (1).png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Very subtle overlay like the image */
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15),
+    rgba(0,0,0,0.35)
+  );
+}
+
+/* SVG container */
+.curved-text {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* TEXT — MATCHES IMAGE */
+.curve-text {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: 26px;          /* smaller, subtle */
+  font-weight: 400;         /* light/regular */
+  letter-spacing: 0.04em;   /* very subtle spacing */
+  text-transform: none;     /* sentence case */
+
+  fill: rgba(255, 255, 255, 0.85); /* soft white */
+}
+
+/* Mobile adjustments */
+@media (max-width: 900px) {
+  .lifestyle-section {
+    height: 420px;
+  }
+
+  .curve-text {
+    font-size: 18px;
+    letter-spacing: 0.03em;
+  }
+}
+
+/* ================= EXPERIENCE SECTION ================= */
+.experience-section {
+  padding: 6rem 2rem;
+  background: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+/* TITLE */
+.experience-title {
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 4rem;
+  color: #222;
+}
+
+.experience-title span {
+  color: #ff7a00;
+}
+
+/* CARDS LAYOUT */
+.experience-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+/* CARD */
+.exp-card {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: auto;
+  border-radius: 50%;
+  border: 1.5px solid #ff7a00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(.16,1,.3,1),
+              box-shadow 0.6s ease;
+  background: #fff;
+}
+
+/* HOVER FLOAT */
+.exp-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+}
+
+/* PLUS BUTTON */
+.exp-plus {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+
+.exp-plus.orange {
+  background: #ff7a00;
+  color: #fff;
+}
+
+.exp-plus.dark {
+  background: #222;
+  color: #fff;
+}
+
+.exp-card:hover .exp-plus {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* CONTENT */
+.exp-content {
+  padding: 2rem;
+  max-width: 230px;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+
+.exp-card:hover .exp-content {
+  opacity: 1;
+}
+
+/* ICON */
+.exp-icon {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+/* TEXT */
+.exp-content h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+}
+
+.exp-content p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .experience-cards {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .experience-title {
+    font-size: 2rem;
+  }
+}
+
+/* ================= LIMITED COLLECTION SECTION ================= */
+.limited-section {
+  padding: 6rem 2rem;
+  background:
+    radial-gradient(800px 400px at 10% 50%, rgba(255,122,0,0.18), transparent 60%),
+    #faf7f2;
+}
+
+.limited-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* LEFT */
+.accent-dots {
+  color: #ff7a00;
+  letter-spacing: 6px;
+  font-size: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.limited-title {
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #222;
+}
+
+.limited-title span {
+  color: #ff7a00;
+}
+
+/* RIGHT */
+.limited-right p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* ================= ADVANCED CTA ================= */
+.cta-advanced {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 1.5rem;
+  padding: 0.9rem 1.8rem;
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1),
+              box-shadow 0.4s ease;
+}
+
+/* Arrow animation */
+.cta-arrow {
+  display: inline-block;
+  transform: translateX(-6px);
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+}
+
+/* Glow overlay */
+.cta-advanced::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+/* HOVER */
+.cta-advanced:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+.cta-advanced:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.cta-advanced:hover::after {
+  transform: translateX(100%);
+}
+
+/* ACCESSIBILITY */
+.cta-advanced:focus-visible {
+  outline: 2px solid #ff7a00;
+  outline-offset: 4px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .limited-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .limited-title {
+    font-size: 2rem;
+  }
+}
+
+  
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="nav">
+
+    <div class="logo">
+      <img class="default_logo"
+        src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+        alt="logotype"
+        style="height: 70px;">
+    </div>
+  
+    <nav class="nav-links">
+  
+      <ul>
+  
+        <!-- ABOUT (Dropdown) -->
+        <li class="has-dropdown">
+          <a href="#" class="nav-link">About</a>
+        
+          <ul class="dropdown">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="philosophy.html">Our Philosophy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </li>
+  
+        <li><a href="shop.html" class="nav-link">Shop</a></li>
+        <li><a href="contacts.html" class="nav-link">Contacts</a></li>
+  
+      </ul>
+  
+      <!-- CART -->
+      <button class="cart-btn" id="openCart">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+  
+    </nav>
+  
+    <!-- CALL TO ACTION -->
+    <button class="cta">
+      <span class="check-icon">✔</span>
+      Contact us
+    </button>
+  
+  </header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-content">
+    <h1 class="reveal-text">
+      Illuminate your<br />
+      space with natural,<br />
+      captivating fragrances
+    </h1>
+
+    <button class="shop-btn">
+      Shop Now →
+    </button>
+  </div>
+
+  <div class="hero-product">
+    <img
+      src="https://luminouscandles.co/wp-content/uploads/2025/02/Home-page-4.png"
+      alt="Home page candle"
+    />
+  </div>
+</section>
+
+<!-- ================= BEST SELLERS SLIDER ================= -->
+<section class="best-sellers">
+    <h2>
+      Our new collection <br />
+      <span>& best sellers</span>
+    </h2>
+  
+    <div class="slider-wrapper">
+      <!-- PREV BUTTON -->
+      <button class="slider-btn left" id="prevBtn">‹</button>
+  
+      <!-- SLIDER -->
+      <div class="slider" id="productSlider">
+  
+        <!-- PRODUCT 1 -->
+        <div class="product-card">
+          <div class="product-img">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Golden-Magic--540x540.png"
+              alt="Golden Magic"
+            />
+            <button
+              class="add-cart"
+              data-id="golden-magic"
+              data-name="Golden Magic"
+              data-price="24"
+              data-image="https://luminouscandles.co/wp-content/uploads/2025/02/Golden-Magic--540x540.png"
+            >
+              🛒 Add to cart
+            </button>
+          </div>
+          <h4>Golden Magic</h4>
+          <p>$24.00</p>
+        </div>
+  
+        <!-- PRODUCT 2 -->
+        <div class="product-card">
+          <div class="product-img">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/15-540x540.png"
+              alt="Naughty Santal"
+            />
+            <button
+              class="add-cart"
+              data-id="naughty-santal"
+              data-name="Naughty Santal"
+              data-price="24"
+              data-image="https://luminouscandles.co/wp-content/uploads/2025/02/15-540x540.png"
+            >
+              🛒 Add to cart
+            </button>
+          </div>
+          <h4>Naughty Santal</h4>
+          <p>$24.00</p>
+        </div>
+  
+        <!-- PRODUCT 3 -->
+        <div class="product-card">
+          <div class="product-img">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Intrigue-540x540.png"
+              alt="Intrigue"
+            />
+            <button
+              class="add-cart"
+              data-id="intrigue"
+              data-name="Intrigue"
+              data-price="24"
+              data-image="https://luminouscandles.co/wp-content/uploads/2025/02/Intrigue-540x540.png"
+            >
+              🛒 Add to cart
+            </button>
+          </div>
+          <h4>Intrigue</h4>
+          <p>$24.00</p>
+        </div>
+  
+        <!-- PRODUCT 4 -->
+        <div class="product-card">
+          <div class="product-img">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/5-540x540.png"
+              alt="Orchid Oasis"
+            />
+            <button
+              class="add-cart"
+              data-id="orchid-oasis"
+              data-name="Orchid Oasis"
+              data-price="24"
+              data-image="https://luminouscandles.co/wp-content/uploads/2025/02/5-540x540.png"
+            >
+              🛒 Add to cart
+            </button>
+          </div>
+          <h4>Orchid Oasis</h4>
+          <p>$24.00</p>
+        </div>
+  
+      </div>
+  
+      <!-- NEXT BUTTON -->
+      <button class="slider-btn right" id="nextBtn">›</button>
+    </div>
+  
+    <!-- DOTS BELOW SLIDER -->
+    <div class="slider-dots" id="dots"></div>
+  </section>
+
+  <section class="lifestyle-section" aria-label="Lifestyle marquee">
+
+    <!-- Background -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+  
+    <svg
+      class="curved-text"
+      viewBox="0 0 3000 420"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <!-- Smooth gentle curve (like image) -->
+      <path
+        id="textPathCurve"
+        d="
+          M -500 230
+          C   0 170,  400 170,  900 230
+          S  1600 290, 2300 230
+          S  3000 170, 3600 230
+        "
+        fill="none"
+      />
+  
+      <text class="curve-text">
+        <textPath href="#textPathCurve" startOffset="-20%">
+          Handmade premium scented candles • Handmade premium scented candles •
+          Handmade premium scented candles • Handmade premium scented candles •
+          Handmade premium scented candles • Handmade premium scented candles •
+          Handmade premium scented candles • Handmade premium scented candles •
+  
+          <animate
+            attributeName="startOffset"
+            from="-20%"
+            to="20%"
+            dur="18s"
+            repeatCount="indefinite"
+          />
+        </textPath>
+      </text>
+    </svg>
+  
+  </section>
+
+  <section class="experience-section">
+    <div class="container">
+  
+      <h2 class="experience-title">
+        Shopping for candles should be a<br />
+        purely soothing experience <span>experience</span>
+      </h2>
+  
+      <div class="experience-cards">
+  
+        <!-- CARD 1 -->
+        <div class="exp-card">
+          <div class="exp-plus orange">+</div>
+  
+          <div class="exp-content">
+            <div class="exp-icon">🍃</div>
+            <h3>Natural materials</h3>
+            <p>
+              We are committed to using premium, eco-friendly wax and essential oils,
+              ensuring a clean and sustainable burn.
+            </p>
+          </div>
+        </div>
+  
+        <!-- CARD 2 -->
+        <div class="exp-card">
+          <div class="exp-plus dark">+</div>
+  
+          <div class="exp-content">
+            <div class="exp-icon">🛡️</div>
+            <h3>Sustainability</h3>
+            <p>
+              Our goal is to create a zero-waste candle brand, using recyclable
+              packaging and responsible sourcing.
+            </p>
+          </div>
+        </div>
+  
+        <!-- CARD 3 -->
+        <div class="exp-card">
+          <div class="exp-plus dark">+</div>
+  
+          <div class="exp-content">
+            <div class="exp-icon">🌍</div>
+            <h3>Expertly Crafted</h3>
+            <p>
+              Each candle is hand-poured with precision, rigorously tested for
+              quality, and designed to last.
+            </p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+
+  <section class="limited-section">
+    <div class="limited-container">
+  
+      <!-- LEFT -->
+      <div class="limited-left">
+        <div class="accent-dots">•••••</div>
+  
+        <h2 class="limited-title">
+          Limited collection <br />
+          of handcrafted candles <br />
+          with <span>natural wax</span>
+        </h2>
+      </div>
+  
+      <!-- RIGHT -->
+      <div class="limited-right">
+        <p>
+          Our mission is to bring warmth and tranquility into every space with
+          beautifully crafted, natural candles. We believe in the power of scent
+          to create meaningful moments and enhance everyday life.
+        </p>
+  
+        <p>
+          Each candle is made with care and intention, allowing you to add your
+          own personal touch and make it a symbol of comfort, joy, and serenity.
+        </p>
+  
+        <a href="#" class="cta-advanced">
+          <span>View more</span>
+          <span class="cta-arrow">→</span>
+        </a>
+      </div>
+  
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="faq-container">
+  
+      <!-- LEFT CONTENT -->
+      <div class="faq-left">
+        <span class="faq-dots">••••••••</span>
+  
+        <h2 class="faq-title">
+          Only the Finest<br />
+          Candles for a <span>Safe &<br />Serene Experience</span>
+        </h2>
+  
+        <div class="faq-item active">
+          <button class="faq-question">
+            What is the difference between natural and synthetic fragrances?
+            <span class="faq-icon">−</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              We carefully craft our candles using high-quality, natural essential oils
+              and premium fragrance blends. While natural oils are derived from plants,
+              synthetic fragrances are created to enhance scent longevity and complexity.
+              We ensure that every ingredient used is non-toxic and safe for your space.
+            </p>
+          </div>
+        </div>
+  
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I get recommendations on the best scents for me?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Absolutely. Our curated collections are designed to match moods, spaces,
+              and seasons. From calming florals to warm woody notes, we help you find
+              your perfect scent.
+            </p>
+          </div>
+        </div>
+  
+        <div class="faq-item">
+          <button class="faq-question">
+            Do you use artificial additives or harmful ingredients?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              No. Our candles are made with clean-burning wax, lead-free wicks, and
+              non-toxic fragrance blends — always safe and responsibly sourced.
+            </p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- RIGHT IMAGE -->
+      <div class="faq-right">
+        <div class="faq-image">
+          <img
+            src="images/Firefly_Gemini Flash (1).png"
+            alt="Candle experience"
+          />
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  <footer class="site-footer">
+    <div class="footer-container">
+  
+      <!-- LEFT -->
+      <div class="footer-col footer-left">
+        <h4>Contact us</h4>
+  
+        <p>
+          <span class="icon">📍</span>
+          45 Salem Turnpike #1062
+        </p>
+  
+        <p>
+          <span class="icon">📞</span>
+          +1 (860) 710–6651
+        </p>
+  
+        <p>
+          <span class="icon">✉️</span>
+          <a href="mailto:info@luminouscandles.co">info@luminouscandles.co</a>
+        </p>
+      </div>
+  
+      <!-- CENTER -->
+      <div class="footer-col footer-center">
+        <p class="footer-description">
+          Purify, nourish, and relax with our handcrafted candles made from natural
+          coconut apricot and 100% soy wax, infused with pure essential oils and
+          botanical extracts for a clean, aromatic experience.
+        </p>
+  
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+  
+      <!-- RIGHT -->
+      <div class="footer-col footer-right">
+        <img
+          src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+          alt="Luminous Candles logo"
+        />
+      </div>
+  
+    </div>
+  
+    <!-- DIVIDER -->
+    <div class="footer-divider"></div>
+  
+    <!-- COPYRIGHT -->
+    <p class="footer-copy">
+      Copyright © 2026 BentJun Hub LLC. All Rights Reserved.
+    </p>
+  </footer>
+  
+         
+<!-- ================= CART DRAWER ================= -->
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-drawer" id="cartDrawer">
+  <header class="cart-header">
+    <h3>Your Cart</h3>
+    <button id="closeCart">✕</button>
+  </header>
+
+  <div class="cart-items" id="cartItems">
+    <!-- Items injected by JS -->
+  </div>
+
+  <footer class="cart-footer">
+    <div class="cart-summary">
+      <span>Subtotal</span>
+      <strong id="cartTotal">$0.00</strong>
+    </div>
+    <button class="checkout-btn">Proceed to Checkout</button>
+  </footer>
+</aside>
+
+<script src="script.js"></script>
+</body>
+</html>

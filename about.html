@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luminous Candles</title>
+<style>
+    .about-section {
+  padding: 80px 5%;
+  background: #ffffff;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Image */
+.about-image img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* Content */
+.about-content {
+  font-family: "Arial", sans-serif;
+}
+
+.about-dot {
+  color: #ff6a00;
+  letter-spacing: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.about-content h2 {
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.about-content h2 span {
+  color: #ff6a00;
+}
+
+.about-content p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+
+  .about-content h2 {
+    font-size: 30px;
+  }
+}
+
+
+</style>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <header class="nav">
+  
+        <div class="logo">
+            <a href="index.html">
+            <img class="default_logo"
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="logotype"
+              style="height: 70px;">
+            </a>  
+          </div>
+    
+      <nav class="nav-links">
+    
+        <ul>
+    
+          <!-- ABOUT (Dropdown) -->
+          <ul class="dropdown">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="philosophy.html">Our Philosophy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </li>
+  
+        <li><a href="shop.html" class="nav-link">Shop</a></li>
+        <li><a href="contacts.html" class="nav-link">Contacts</a></li>
+    
+        </ul>
+
+      </nav>
+    
+      <!-- CALL TO ACTION -->
+      <button class="cta">
+        <span class="check-icon">✔</span>
+        Contact us
+      </button>
+      
+    </header>
+    <section class="about-section">
+        <div class="about-container">
+      
+          <!-- Image -->
+          <div class="about-image">
+            <img decoding="async" src="https://luminouscandles.co/wp-content/uploads/2025/02/Screenshot-2025-02-27-at-6.08.37-PM.png" alt="Screenshot 2025-02-27 at 6.08.37 PM" />
+          </div>
+      
+          <!-- Content -->
+          <div class="about-content">
+            <span class="about-dot">••••••</span>
+            <h2>
+              Welcome to <span>Luminous Candles</span>
+            </h2>
+      
+            <p>
+              Luminous Candles Co. began as a shared passion between a mother-and-daughter duo, driven by a love for creating moments of peace and connection. What started as a small family project has grown into a thriving business that brings warmth and light to homes across the country.
+            </p>
+      
+            <p>
+              At Luminous Candles, we believe in good vibes, meaningful connections, and celebrating life’s simple joys. Each of our candles is handcrafted in small batches using sustainable materials, designed to fill your space with long-lasting comfort and beauty. For us, it’s not just about self-care—it’s about creating an atmosphere that brings people together and sparks lasting memories.
+            </p>
+      
+            <p>
+              Dora Amoah, Founder and CEO, worked in the healthcare sector for over 15 years before taking a leap of faith to launch Luminous Candles Co. Together with her daughter, she pours her heart into every candle, ensuring each one embodies the warmth and care that inspired this journey.
+            </p>
+      
+            <p>
+              As a family-owned business, our hope is that our candles bring a little extra light, love, and joy to your life. From our hands to your home—thank you for being part of our story.
+            </p>
+          </div>
+      
+        </div>
+      </section>
+      
+    <footer class="site-footer">
+        <div class="footer-container">
+      
+          <!-- LEFT -->
+          <div class="footer-col footer-left">
+            <h4>Contact us</h4>
+      
+            <p>
+              <span class="icon">📍</span>
+              45 Salem Turnpike #1062
+            </p>
+      
+            <p>
+              <span class="icon">📞</span>
+              +1 (860) 710–6651
+            </p>
+      
+            <p>
+              <span class="icon">✉️</span>
+              <a href="mailto:info@luminouscandles.co">info@luminouscandles.co</a>
+            </p>
+          </div>
+      
+          <!-- CENTER -->
+          <div class="footer-col footer-center">
+            <p class="footer-description">
+              Purify, nourish, and relax with our handcrafted candles made from natural
+              coconut apricot and 100% soy wax, infused with pure essential oils and
+              botanical extracts for a clean, aromatic experience.
+            </p>
+      
+            <div class="footer-socials">
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+            </div>
+          </div>
+      
+          <!-- RIGHT -->
+          <div class="footer-col footer-right">
+            <img
+              src="https://luminouscandles.co/wp-content/uploads/2025/02/Luminous-Candles_black.png"
+              alt="Luminous Candles logo"
+            />
+          </div>
+      
+        </div>
+      
+        <!-- DIVIDER -->
+        <div class="footer-divider"></div>
+      
+        <!-- COPYRIGHT -->
+        <p class="footer-copy">
+          Copyright © 2026 BentJun Hub LLC. All Rights Reserved.
+        </p>
+      </footer>
+
+</body>
