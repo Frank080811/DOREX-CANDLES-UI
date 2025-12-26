@@ -441,11 +441,13 @@
     </div>
   
     <label class="policy-check">
-      <input type="checkbox" required>
+      <input type="checkbox" id="policyCheck" required>
       I have read and agree to the website policies
     </label>
-  
-    <button class="pay-btn">Pay with PayPal</button>
+    
+    <button class="pay-btn" id="payBtn">
+      Pay with PayPal
+    </button>
   
   </aside>
   
@@ -512,11 +514,14 @@
           Copyright © 2026 BentJun Hub LLC. All Rights Reserved.
         </p>
       </footer>
+      <script src="js/config.js"></script>  
       <script>
         document.addEventListener("DOMContentLoaded", () => {
         
+          /* ================= CONFIG ================= */
           const API_BASE_URL = "https://iluminous-candle-uk-be.onrender.com";
         
+          /* ================= LOAD CHECKOUT DATA ================= */
           const checkoutData = JSON.parse(localStorage.getItem("checkoutData"));
           if (!checkoutData || !checkoutData.items?.length) {
             alert("No order data found.");
@@ -531,7 +536,9 @@
           const taxCostEl = document.getElementById("taxCost");
           const totalCostEl = document.getElementById("totalCost");
           const stateSelect = document.getElementById("state");
-          const payBtn = document.querySelector(".pay-btn");
+        
+          const payBtn = document.getElementById("payBtn");
+          const policyCheck = document.getElementById("policyCheck");
         
           let subtotal = 0;
           let discount = checkoutData.discount?.amount || 0;
@@ -563,7 +570,7 @@
             return subtotal <= 50 ? 5.99 : 0.0;
           }
         
-          /* ================= RENDER ITEMS ================= */
+          /* ================= RENDER ORDER ITEMS ================= */
           orderItemsEl.innerHTML = "";
           checkoutData.items.forEach(item => {
             const lineTotal = item.price * item.qty;
@@ -577,7 +584,7 @@
             `;
           });
         
-          /* ================= TOTALS ================= */
+          /* ================= TOTAL CALC ================= */
           function updateTotals() {
             const shipping = getShipping(subtotal);
             const taxRate = getTaxRateByState(stateSelect?.value || "");
@@ -596,16 +603,20 @@
           /* ================= PAY BUTTON ================= */
           payBtn.addEventListener("click", async () => {
         
-            // Collect customer info
+            if (!policyCheck.checked) {
+              alert("You must agree to the website policies before proceeding.");
+              return;
+            }
+        
             const payload = {
               customer: {
-                fullName: document.querySelector("[name='fullName']").value,
-                email: document.querySelector("[name='email']").value,
-                phone: document.querySelector("[name='phone']").value,
-                address: document.querySelector("[name='address']").value,
-                city: document.querySelector("[name='city']").value,
-                state: document.getElementById("state").value,
-                zip: document.querySelector("[name='zip']").value,
+                fullName: document.querySelector('input[name="fullName"]')?.value || "",
+                email: document.querySelector('input[name="email"]')?.value || "",
+                phone: document.querySelector('input[name="phone"]')?.value || "",
+                address: document.querySelector('input[name="address"]')?.value || "",
+                city: document.querySelector('input[name="city"]')?.value || "",
+                state: stateSelect?.value || "",
+                zip: document.querySelector('input[name="zip"]')?.value || "",
                 country: "United States"
               },
               cart: checkoutData.items.map(i => ({
@@ -615,15 +626,10 @@
               }))
             };
         
-            if (!payload.customer.state) {
-              alert("Please select a state to calculate tax.");
-              return;
-            }
+            payBtn.disabled = true;
+            payBtn.textContent = "Redirecting…";
         
             try {
-              payBtn.disabled = true;
-              payBtn.textContent = "Redirecting to payment…";
-        
               const res = await fetch(`${API_BASE_URL}/create-checkout-session`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -637,18 +643,14 @@
         
             } catch (err) {
               console.error(err);
-              alert("Unable to proceed to checkout. Please try again.");
+              alert("Payment failed. Please try again.");
               payBtn.disabled = false;
               payBtn.textContent = "Pay with PayPal";
             }
           });
         
         });
-        </script>
-        
-        
-        
-    <script src="js/config.js"></script>       
+        </script>     
 </body>
 
 
