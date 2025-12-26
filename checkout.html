@@ -515,6 +515,8 @@
       <script>
         document.addEventListener("DOMContentLoaded", () => {
         
+          const API_BASE_URL = "https://iluminous-candle-uk-be.onrender.com";
+        
           const checkoutData = JSON.parse(localStorage.getItem("checkoutData"));
           if (!checkoutData || !checkoutData.items?.length) {
             alert("No order data found.");
@@ -522,18 +524,20 @@
             return;
           }
         
+          /* ================= ELEMENTS ================= */
           const orderItemsEl = document.getElementById("orderItems");
           const productsCostEl = document.getElementById("productsCost");
           const shippingCostEl = document.getElementById("shippingCost");
           const taxCostEl = document.getElementById("taxCost");
           const totalCostEl = document.getElementById("totalCost");
           const stateSelect = document.getElementById("state");
+          const payBtn = document.querySelector(".pay-btn");
         
           let subtotal = 0;
           let discount = checkoutData.discount?.amount || 0;
         
           /* ================= TAX HELPER ================= */
-          function getTaxRateByState(state){
+          function getTaxRateByState(state) {
             const taxRates = {
               "Alabama": 0.04, "Alaska": 0.00, "Arizona": 0.056,
               "Arkansas": 0.065, "California": 0.0725,
@@ -573,7 +577,7 @@
             `;
           });
         
-          /* ================= TOTAL CALC ================= */
+          /* ================= TOTALS ================= */
           function updateTotals() {
             const shipping = getShipping(subtotal);
             const taxRate = getTaxRateByState(stateSelect?.value || "");
@@ -587,11 +591,65 @@
           }
         
           stateSelect?.addEventListener("change", updateTotals);
-        
           updateTotals();
+        
+          /* ================= PAY BUTTON ================= */
+          payBtn.addEventListener("click", async () => {
+        
+            // Collect customer info
+            const payload = {
+              customer: {
+                fullName: document.querySelector("[name='fullName']").value,
+                email: document.querySelector("[name='email']").value,
+                phone: document.querySelector("[name='phone']").value,
+                address: document.querySelector("[name='address']").value,
+                city: document.querySelector("[name='city']").value,
+                state: document.getElementById("state").value,
+                zip: document.querySelector("[name='zip']").value,
+                country: "United States"
+              },
+              cart: checkoutData.items.map(i => ({
+                name: i.name,
+                price: i.price,
+                qty: i.qty
+              }))
+            };
+        
+            if (!payload.customer.state) {
+              alert("Please select a state to calculate tax.");
+              return;
+            }
+        
+            try {
+              payBtn.disabled = true;
+              payBtn.textContent = "Redirecting to payment…";
+        
+              const res = await fetch(`${API_BASE_URL}/create-checkout-session`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+              });
+        
+              if (!res.ok) throw new Error("Checkout failed");
+        
+              const data = await res.json();
+              window.location.href = data.url;
+        
+            } catch (err) {
+              console.error(err);
+              alert("Unable to proceed to checkout. Please try again.");
+              payBtn.disabled = false;
+              payBtn.textContent = "Pay with PayPal";
+            }
+          });
+        
         });
         </script>
         
         
         
+    <script src="js/config.js"></script>       
 </body>
+
+
+</html>

@@ -127,32 +127,58 @@ p{color:#666;font-size:.95rem}
 </div>
 
 <script>
-(async()=>{
-  const params = new URLSearchParams(window.location.search);
-  const orderId = params.get("order_id");
-
-  if(!orderId) return;
-
-  document.getElementById("orderId").textContent = orderId;
-
-  try{
-    const res = await fetch(`${location.origin.replace(/\/$/, '')}/order/${orderId}`);
-    const data = await res.json();
-
-    document.getElementById("subtotal").textContent = data.order.subtotal.toFixed(2);
-    document.getElementById("tax").textContent = data.order.tax.toFixed(2);
-    document.getElementById("shipping").textContent = data.order.shipping.toFixed(2);
-    document.getElementById("total").textContent = data.order.total.toFixed(2);
-
-    // Clear client cart
-    localStorage.removeItem("cart");
-    localStorage.removeItem("checkoutData");
-
-  }catch(err){
-    console.error("Order fetch failed", err);
-  }
-})();
-</script>
-
+    document.addEventListener("DOMContentLoaded", async () => {
+    
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get("order_id");
+    
+      if (!orderId) {
+        console.warn("No order_id found in URL");
+        return;
+      }
+    
+      const orderIdEl = document.getElementById("orderId");
+      const subtotalEl = document.getElementById("subtotal");
+      const taxEl = document.getElementById("tax");
+      const shippingEl = document.getElementById("shipping");
+      const totalEl = document.getElementById("total");
+    
+      if (orderIdEl) {
+        orderIdEl.textContent = orderId;
+      }
+    
+      try {
+        const res = await fetch(`${API_BASE_URL}/order/${orderId}`);
+    
+        if (!res.ok) {
+          throw new Error("Failed to fetch order");
+        }
+    
+        const data = await res.json();
+    
+        if (!data.order) {
+          throw new Error("Invalid order data");
+        }
+    
+        subtotalEl.textContent = Number(data.order.subtotal).toFixed(2);
+        taxEl.textContent = Number(data.order.tax).toFixed(2);
+        shippingEl.textContent = Number(data.order.shipping).toFixed(2);
+        totalEl.textContent = Number(data.order.total).toFixed(2);
+    
+        // ✅ Clear cart ONLY after successful confirmation
+        localStorage.removeItem("cart");
+        localStorage.removeItem("checkoutData");
+    
+      } catch (err) {
+        console.error("Order fetch failed:", err);
+    
+        // Optional user feedback
+        totalEl.textContent = "—";
+      }
+    });
+    </script>
+    
+<script src="js/config.js"></script>
 </body>
+
 </html>
