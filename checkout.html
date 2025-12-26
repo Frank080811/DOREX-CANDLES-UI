@@ -586,6 +586,13 @@
           });
         
           /* ================= TOTALS ================= */
+          let totals = {
+            subtotal: 0,
+            tax: 0,
+            shipping: 0,
+            total: 0
+          };
+        
           function updateTotals() {
             const shipping = getShipping(subtotal);
             const taxRate = getTaxRateByState(stateSelect.value);
@@ -593,10 +600,17 @@
             const tax = taxableAmount * taxRate;
             const total = taxableAmount + shipping + tax;
         
-            productsCostEl.textContent = subtotal.toFixed(2);
-            shippingCostEl.textContent = shipping.toFixed(2);
-            taxCostEl.textContent = tax.toFixed(2);
-            totalCostEl.textContent = total.toFixed(2);
+            totals = {
+              subtotal: Number(subtotal.toFixed(2)),
+              tax: Number(tax.toFixed(2)),
+              shipping: Number(shipping.toFixed(2)),
+              total: Number(total.toFixed(2))
+            };
+        
+            productsCostEl.textContent = totals.subtotal.toFixed(2);
+            shippingCostEl.textContent = totals.shipping.toFixed(2);
+            taxCostEl.textContent = totals.tax.toFixed(2);
+            totalCostEl.textContent = totals.total.toFixed(2);
           }
         
           stateSelect.addEventListener("change", updateTotals);
@@ -610,7 +624,6 @@
               return;
             }
         
-            /* ===== COLLECT FORM DATA ===== */
             const firstName = document.getElementById("firstName")?.value.trim();
             const lastName = document.getElementById("lastName")?.value.trim();
             const fullName = `${firstName} ${lastName}`.trim();
@@ -642,7 +655,8 @@
                 name: i.name,
                 price: Number(i.price),
                 qty: Number(i.qty)
-              }))
+              })),
+              totals
             };
         
             payBtn.disabled = true;
@@ -674,7 +688,7 @@
         
         });
         </script>
-             
+        
 </body>
 
 
