@@ -542,7 +542,7 @@
           const policyCheck = document.getElementById("policyCheck");
         
           let subtotal = 0;
-          let discount = checkoutData.discount?.amount || 0;
+          const discount = Number(checkoutData.discount?.amount || 0);
         
           /* ================= TAX HELPER ================= */
           function getTaxRateByState(state) {
@@ -571,10 +571,10 @@
             return subtotal <= 50 ? 5.99 : 0.0;
           }
         
-          /* ================= RENDER ORDER ITEMS ================= */
+          /* ================= RENDER ITEMS ================= */
           orderItemsEl.innerHTML = "";
           checkoutData.items.forEach(item => {
-            const lineTotal = item.price * item.qty;
+            const lineTotal = Number(item.price) * Number(item.qty);
             subtotal += lineTotal;
         
             orderItemsEl.innerHTML += `
@@ -585,12 +585,13 @@
             `;
           });
         
-          /* ================= TOTAL CALC ================= */
+          /* ================= TOTALS ================= */
           function updateTotals() {
             const shipping = getShipping(subtotal);
-            const taxRate = getTaxRateByState(stateSelect?.value || "");
-            const tax = (subtotal - discount) * taxRate;
-            const total = subtotal - discount + shipping + tax;
+            const taxRate = getTaxRateByState(stateSelect.value);
+            const taxableAmount = Math.max(subtotal - discount, 0);
+            const tax = taxableAmount * taxRate;
+            const total = taxableAmount + shipping + tax;
         
             productsCostEl.textContent = subtotal.toFixed(2);
             shippingCostEl.textContent = shipping.toFixed(2);
@@ -598,76 +599,82 @@
             totalCostEl.textContent = total.toFixed(2);
           }
         
-          stateSelect?.addEventListener("change", updateTotals);
+          stateSelect.addEventListener("change", updateTotals);
           updateTotals();
         
           /* ================= PAY BUTTON ================= */
           payBtn.addEventListener("click", async () => {
-
-if (!policyCheck.checked) {
-  alert("You must agree to the website policies before proceeding.");
-  return;
-}
-
-/* ================= REQUIRED FIELDS ================= */
-const fullName = document.querySelector('input[name="fullName"]')?.value.trim();
-const email = document.querySelector('input[name="email"]')?.value.trim();
-const phone = document.querySelector('input[name="phone"]')?.value.trim();
-const address = document.querySelector('input[name="address"]')?.value.trim();
-const city = document.querySelector('input[name="city"]')?.value.trim();
-const state = stateSelect?.value;
-const zip = document.querySelector('input[name="zip"]')?.value.trim();
-
-if (!fullName || !email || !phone || !address || !city || !state || !zip) {
-  alert("Please complete all required billing and delivery fields.");
-  return;
-}
-
-const payload = {
-  customer: {
-    fullName,
-    email,
-    phone,
-    address,
-    city,
-    state,
-    zip,
-    country: "United States"
-  },
-  cart: checkoutData.items.map(i => ({
-    name: i.name,
-    price: Number(i.price),
-    qty: Number(i.qty)
-  }))
-};
-
-payBtn.disabled = true;
-payBtn.textContent = "Redirecting…";
-
-try {
-  const res = await fetch(`${API_BASE_URL}/create-checkout-session`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    console.error("Backend error:", err);
-    throw new Error("Checkout failed");
-  }
-
-  const data = await res.json();
-  window.location.href = data.url;
-
-} catch (err) {
-  console.error(err);
-  alert("Unable to start payment. Please try again.");
-  payBtn.disabled = false;
-  payBtn.textContent = "Pay with PayPal";
-}
-});
-        </script>     
+        
+            if (!policyCheck.checked) {
+              alert("You must agree to the website policies before proceeding.");
+              return;
+            }
+        
+            /* ===== COLLECT FORM DATA ===== */
+            const firstName = document.getElementById("firstName")?.value.trim();
+            const lastName = document.getElementById("lastName")?.value.trim();
+            const fullName = `${firstName} ${lastName}`.trim();
+        
+            const email = document.querySelector('input[name="email"]')?.value.trim();
+            const phone = document.querySelector('input[name="phone"]')?.value.trim();
+            const address = document.querySelector('input[name="address"]')?.value.trim();
+            const city = document.querySelector('input[name="city"]')?.value.trim();
+            const state = stateSelect.value;
+            const zip = document.querySelector('input[name="zip"]')?.value.trim();
+        
+            if (!firstName || !lastName || !email || !phone || !address || !city || !state || !zip) {
+              alert("Please complete all required billing and delivery fields.");
+              return;
+            }
+        
+            const payload = {
+              customer: {
+                fullName,
+                email,
+                phone,
+                address,
+                city,
+                state,
+                zip,
+                country: "United States"
+              },
+              cart: checkoutData.items.map(i => ({
+                name: i.name,
+                price: Number(i.price),
+                qty: Number(i.qty)
+              }))
+            };
+        
+            payBtn.disabled = true;
+            payBtn.textContent = "Redirecting…";
+        
+            try {
+              const res = await fetch(`${API_BASE_URL}/create-checkout-session`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+              });
+        
+              if (!res.ok) {
+                const err = await res.text();
+                console.error("Backend error:", err);
+                throw new Error("Checkout failed");
+              }
+        
+              const data = await res.json();
+              window.location.href = data.url;
+        
+            } catch (err) {
+              console.error(err);
+              alert("Unable to start payment. Please try again.");
+              payBtn.disabled = false;
+              payBtn.textContent = "Pay with PayPal";
+            }
+          });
+        
+        });
+        </script>
+             
 </body>
 
 
