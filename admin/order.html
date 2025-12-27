@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orders – Luminous Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="admin-sidebar">
+    <div class="brand">
+      <span class="logo-dot"></span>
+      <span class="brand-text">Luminous Admin</span>
+    </div>
+
+    <nav class="nav">
+      <a href="dashboard.html" class="nav-link">
+        <span class="icon">📊</span>
+        <span class="text">Dashboard</span>
+      </a>
+
+      <a href="orders.html" class="nav-link active">
+        <span class="icon">📦</span>
+        <span class="text">Orders</span>
+      </a>
+
+      <a href="analytics.html" class="nav-link">
+        <span class="icon">💰</span>
+        <span class="text">Revenue</span>
+      </a>
+
+      <a href="labels.html" class="nav-link">
+        <span class="icon">🖨</span>
+        <span class="text">Shipping Labels</span>
+      </a>
+
+      <a href="invoices.html" class="nav-link">
+        <span class="icon">🧾</span>
+        <span class="text">Invoices</span>
+      </a>
+
+      <a href="settings.html" class="nav-link">
+        <span class="icon">⚙️</span>
+        <span class="text">Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="admin-main">
+
+    <!-- PAGE HEADER -->
+    <header class="admin-header">
+      <h1>Orders</h1>
+      <p class="muted">Manage customer orders and fulfillment</p>
+    </header>
+
+    <!-- ORDERS CONTENT -->
+    <section class="content">
+
+      <!-- ORDER LIST (populated by JS) -->
+      <div id="ordersTable" class="admin-table-wrapper">
+        <!-- order.js will inject table here -->
+      </div>
+
+      <!-- ORDER DETAILS PANEL -->
+      <div class="order-card">
+        <h2>Order Details</h2>
+
+        <div id="orderInfo" class="order-info">
+          <p class="muted">Select an order to view details</p>
+        </div>
+
+        <div class="order-actions">
+
+            <button id="downloadLabel" class="action-btn primary">
+              <span class="icon">⬇</span>
+              <span class="label">Download Label</span>
+            </button>
+          
+            <button id="printLabels" class="action-btn secondary">
+              <span class="icon">🖨</span>
+              <span class="label">Print Labels</span>
+            </button>
+          
+            <button class="action-btn outline email-btn">
+              <span class="icon">📧</span>
+              <span class="label">Resend Email</span>
+            </button>
+          
+          </div>
+          
+
+    </section>
+
+  </main>
+
+  <!-- JS -->
+  <script type="module" src="js/order.js"></script>
+
+</body>
+</html>

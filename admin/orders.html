@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orders – Luminous Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Admin Styles -->
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="admin-sidebar">
+    <div class="brand">
+      <span class="logo-dot"></span>
+      <span class="brand-text">Luminous Admin</span>
+    </div>
+
+    <nav class="nav">
+      <a href="dashboard.html" class="nav-link">
+        <span class="icon">📊</span>
+        <span class="text">Dashboard</span>
+      </a>
+
+      <a href="orders.html" class="nav-link active">
+        <span class="icon">📦</span>
+        <span class="text">Orders</span>
+      </a>
+
+      <a href="analytics.html" class="nav-link">
+        <span class="icon">💰</span>
+        <span class="text">Revenue</span>
+      </a>
+
+      <a href="labels.html" class="nav-link">
+        <span class="icon">🖨</span>
+        <span class="text">Shipping Labels</span>
+      </a>
+
+      <a href="invoices.html" class="nav-link">
+        <span class="icon">🧾</span>
+        <span class="text">Invoices</span>
+      </a>
+
+      <a href="settings.html" class="nav-link">
+        <span class="icon">⚙️</span>
+        <span class="text">Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="admin-main">
+
+    <!-- PAGE HEADER -->
+    <header class="admin-header">
+      <h1>Orders</h1>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="content">
+
+        <div class="filters-bar">
+            <div class="search-wrap">
+              <span class="search-icon">🔍</span>
+              <input
+                id="search"
+                type="search"
+                placeholder="Search by email or order ID"
+                class="search-input"
+              />
+            </div>
+          
+            <div class="select-wrap">
+              <select id="status" class="status-select">
+                <option value="">All Status</option>
+                <option value="PAID">Paid</option>
+                <option value="PENDING">Pending</option>
+              </select>
+              <span class="select-icon">▾</span>
+            </div>
+          </div>
+          
+
+      <!-- ===== ORDERS TABLE ===== -->
+      <div class="table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Status</th>
+              <th>Total</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="ordersBody">
+            <!-- Filled dynamically by orders.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ORDERS SCRIPT -->
+  <script type="module" src="js/orders.js"></script>
+
+</body>
+</html>
