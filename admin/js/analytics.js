@@ -1,3 +1,12 @@
+if (!localStorage.getItem("adminToken")) {
+    window.location.href = "admin-login.html";
+  }  
+
+  document.getElementById("logoutBtn")?.addEventListener("click", () => {
+    localStorage.removeItem("adminToken");
+    window.location.href = "admin-login.html";
+  });
+  
 import { apiFetch } from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
